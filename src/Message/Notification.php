@@ -12,10 +12,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 class Notification implements NotificationInterface
 {
 
-    private $data;
+    public $data;
     private $checkString;
-
-    public $httpResponse;
 
     use ParametersTrait {
         setParameter as traitSetParameter;
@@ -24,7 +22,7 @@ class Notification implements NotificationInterface
 
     public function __construct(array $options = [])
     {
-        $this->httpResponse = new Response();
+        $this->data = json_decode(file_get_contents('php://input'),1);
         $this->initialize();
     }
 
@@ -48,8 +46,6 @@ class Notification implements NotificationInterface
     }
 
     public function getData() {
-
-        $this->data = json_decode($this->httpResponse->getBody()->getContents(),1);
 
         if (isset($this->data['id'])){
             $this->setParameter('invoiceId',$this->data['id']);

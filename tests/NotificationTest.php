@@ -19,7 +19,7 @@ class NotificationTest extends TestCase
 
         $this->notification->initialize(['apiKey' => '1234','secretKey' => '4321']);
 
-        $this->notification->httpResponse = $this->getMockHttpResponse('invoiceWebhook.txt');
+        $this->notification->data = json_decode(file_get_contents(__DIR__ . "\Mock\invoiceWebhook.json"),1);
 
         $this->notification->getData();
     }
@@ -56,7 +56,7 @@ class NotificationTest extends TestCase
                     "currency" => 'BTC'
                 ]
             ],
-            "data" => [],
+            "data" => '{}',
             "sign" => "c3987f9054d09f590f00a93d3f388f62c671f6109cf9f85df4eff329bae6c818",
             "sign_2" => "36a78bb6d755027672500fbf5850e38232f2e9fe948292d92ceb55db5ddcba91"
         ];
