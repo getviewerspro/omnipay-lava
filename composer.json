@@ -1,0 +1,30 @@
+{
+    "name": "alekseyblymin/omnipay-bitbanker",
+    "description": "bitbanker gateway for Omnipay",
+    "type": "library",
+    "require": {
+        "league/omnipay": "^3.2",
+      "ext-json": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\bitBanker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AlekseyBlymin",
+            "email": "alexei.blymin@yandex.ru"
+        }
+    ],
+    "keywords": [
+        "bitbanker",
+        "api",
+        "payment"
+    ],
+    "require-dev": {
+        "omnipay/tests": "^4.1",
+        "phpunit/phpunit": "9.5"
+    }
+}
