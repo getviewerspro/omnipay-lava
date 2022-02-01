@@ -1,5 +1,5 @@
 {
-    "name": "alekseyblymin/omnipay-bitbanker",
+    "name": "getviewerspro/omnipay-bitbanker",
     "description": "bitbanker gateway for Omnipay",
     "type": "library",
     "require": {
