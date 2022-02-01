@@ -3,7 +3,7 @@
     "description": "bitbanker gateway for Omnipay",
     "type": "library",
     "require": {
-        "league/omnipay": "^3.2",
+        "league/omnipay": "^3.0",
       "ext-json": "*"
     },
     "license": "MIT",
@@ -24,7 +24,7 @@
         "payment"
     ],
     "require-dev": {
-        "omnipay/tests": "^4.1",
-        "phpunit/phpunit": "9.5"
+        "omnipay/tests": "^3.0",
+        "phpunit/phpunit": "^8.0"
     }
 }
