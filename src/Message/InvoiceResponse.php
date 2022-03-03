@@ -30,4 +30,19 @@ class InvoiceResponse extends AbstractResponse
         return $this->data;
 
     }
+    
+    public function isRedirect()
+    {
+        return true;
+    }
+
+    public function getRedirectUrl()
+    {
+        return $this->getInvoiceLink();
+    }
+
+    public function getRedirectMethod()
+    {
+        return 'GET';
+    }
 }
