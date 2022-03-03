@@ -3,8 +3,9 @@
 namespace Omnipay\bitBanker\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\RedirectResponseInterface;
 
-class InvoiceResponse extends AbstractResponse
+class InvoiceResponse extends AbstractResponse implements RedirectResponseInterface
 {
 
     public function isSuccessful()
