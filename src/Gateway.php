@@ -55,5 +55,12 @@ class Gateway extends AbstractGateway
 
         return $obj->getData();
     }
+    
+    
+
+    public function purchase(array $options = [])
+    {
+        return $this->createRequest(InvoiceRequest::class, $options);
+    }
 
 }
