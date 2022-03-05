@@ -15,7 +15,7 @@ $gateway->setApiKey('1234');
 //Включение тестового режима
 $gateway->setTestMode(true);
 
-$response = $gateway->createInvoice([
+$response = $gateway->purchase([
     "payment_currencies" => ["BTC"],
     "currency" => "RUB",
     "amount" => 5000,
@@ -46,13 +46,13 @@ $gateway = Omnipay::create('bitBanker');
 $gateway->setApiKey('1234')
         ->setSecretKey('4321');
         
-$notification = $gateway->acceptNotification();
+$response = $gateway->completePurchase();
 
 //Получение ID счета;
-$notification->getInvoiceId();
+$response->getTransactionId();
 
 //Данные которые использовались при создании счета
-$notification->setInvoiceRequestData([
+$response->setRequestData([
     "currency" => "RUB",
     "amount" => 5000,
     "description" => "покупка ноутбука модель ACer..",
@@ -60,12 +60,12 @@ $notification->setInvoiceRequestData([
 ]);
 
 //Проверка подписей
-if ($notification->check()) {
+if ($response->check()) {
 
-    //Получение подробной информации об оплате
-    print_r($notification->getMessage());
-    
-    //Получение статуса
-    echo $notification->getTransactionStatus();
+    if ($response->isSuccessful()) {
+        print_r($response->getAmount());
+        print_r($response->getCurrency());
+    }
+
 }
 ```
