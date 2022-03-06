@@ -194,6 +194,10 @@ class Notification implements NotificationInterface
 
     public function isSuccessful()
     {
-        return $this->data['payed'];
+        if (!isset($this->data['error'])) {
+            return $this->data['payed'];
+        } else {
+            return false;
+        }
     }
 }
