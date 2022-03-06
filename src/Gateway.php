@@ -47,7 +47,25 @@ class Gateway extends AbstractGateway
         return $this->createRequest(InvoiceRequest::class, $options);
     }
 
+    /**
+        Alias for createInvoice
+     */
+    public function purchase(array $options = array()): \Omnipay\Common\Message\RequestInterface
+    {
+        return $this->createInvoice($options);
+    }
+
     public function acceptNotification(array $options = array()): \Omnipay\Common\Message\NotificationInterface
+    {
+        return $this->responseHandler($options);
+    }
+
+    public function completePurchase(array $options = array()): \Omnipay\Common\Message\NotificationInterface
+    {
+        return $this->responseHandler($options);
+    }
+
+    private function  responseHandler(array $options = array())
     {
         $obj = new Notification();
 

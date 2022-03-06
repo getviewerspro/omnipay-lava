@@ -65,12 +65,27 @@ class Notification implements NotificationInterface
         return $this->getParameter('invoiceId');
     }
 
-    public function setInvoiceRequestData($arFields)
+    public function getTransactionId()
+    {
+        return $this->getParameter('invoiceId');
+    }
+
+    public function getAmount()
+    {
+        return $this->data['payed_amount'];
+    }
+
+    public function getCurrency()
+    {
+        return $this->data['currency'];
+    }
+
+    public function setRequestData($arFields)
     {
         return $this->setParameter('invoiceRequestData',$arFields);
     }
 
-    public function getInvoiceRequestData()
+    public function getRequestData()
     {
         return $this->getParameter('invoiceRequestData');
     }
@@ -107,7 +122,7 @@ class Notification implements NotificationInterface
     protected function prepareSignString()
     {
 
-        $invoiceData = $this->getInvoiceRequestData();
+        $invoiceData = $this->getRequestData();
 
         $return = $invoiceData['currency'];
         $return .= $invoiceData['amount'];
@@ -174,6 +189,15 @@ class Notification implements NotificationInterface
             return NotificationInterface::STATUS_COMPLETED;
         } else {
             return NotificationInterface::STATUS_FAILED;
+        }
+    }
+
+    public function isSuccessful()
+    {
+        if (!isset($this->data['error'])) {
+            return $this->data['payed'];
+        } else {
+            return false;
         }
     }
 }

@@ -29,7 +29,7 @@ class NotificationTest extends TestCase
 
         $this->assertEquals('123Ddd',$this->notification->getInvoiceId());
 
-        $this->notification->setInvoiceRequestData([
+        $this->notification->setRequestData([
             "currency" => "RUB",
             "amount" => 5000,
             "description" => "buy something special",
@@ -76,4 +76,23 @@ class NotificationTest extends TestCase
         $this->assertEquals(NotificationInterface::STATUS_COMPLETED,$this->notification->getTransactionStatus());
     }
 
+    public function testIsSuccessfulTrue()
+    {
+        $this->assertTrue($this->notification->isSuccessful());
+    }
+
+    public function testGetTransactionId()
+    {
+        $this->assertEquals('123Ddd',$this->notification->getTransactionId());
+    }
+
+    public function testGetAmount()
+    {
+        $this->assertEquals(5000,$this->notification->getAmount());
+    }
+
+    public function testGetCurrency()
+    {
+        $this->assertEquals("RUB",$this->notification->getCurrency());
+    }
 }
