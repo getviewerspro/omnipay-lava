@@ -60,7 +60,7 @@ class Gateway extends AbstractGateway
         return $this->responseHandler($options);
     }
 
-    public function completePurchase(array $options = array()): \Omnipay\Common\Message\RequestInterface
+    public function completePurchase(array $options = array()): \Omnipay\Common\Message\NotificationInterface
     {
         return $this->responseHandler($options);
     }
