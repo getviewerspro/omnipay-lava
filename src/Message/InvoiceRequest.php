@@ -8,7 +8,7 @@ class InvoiceRequest extends AbstractRequest
 {
     protected $method     = 'POST';
     public $productionUri = "https://api.aws.bitbanker.ru/latest/api/v1/invoices";
-    public $testUri       = "";
+    public $testUri       = "https://api.dev.aws.bitbanker.ru/latest/";
 
     /**
      * @throws InvalidRequestException
