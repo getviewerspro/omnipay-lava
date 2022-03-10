@@ -7,7 +7,7 @@ use Omnipay\Common\Exception\InvalidRequestException;
 class InvoiceRequest extends AbstractRequest
 {
     protected $method     = 'POST';
-    public $productionUri = "https://api.aws.bitbanker.ru/latest/api/v1/invoices";
+    public $productionUri = "https://api.dev.aws.bitbanker.ru/latest/";//"https://api.aws.bitbanker.ru/latest/api/v1/invoices";
     public $testUri       = "https://api.dev.aws.bitbanker.ru/latest/";
 
     /**
