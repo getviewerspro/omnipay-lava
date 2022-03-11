@@ -31,22 +31,58 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('invoiceId');
     }
 
+    public function setData($value)
+    {
+        return $this->setParameter('data',json_decode($value,1));
+    }
+
+    public function setSign($value) {
+        return $this->setParameter('sign',$value);
+    }
+
+    public function getSign() {
+        return $this->getParameter('sign');
+    }
+
+    public function setSign2($value) {
+        return $this->setParameter('sign2',$value);
+    }
+
+    public function getSign2() {
+        return $this->getParameter('sign2');
+    }
+
+    public function getData()
+    {
+        return $this->getParameter('data');
+    }
+
     public function getTransactionId()
     {
 
-        $additionalData = json_decode($this->data['data'],1);
+        $additionalData = $this->getData();
 
         return $additionalData['transactionId'];
     }
 
+    public function setAmount($value)
+    {
+        return $this->setParameter('payed_amount',$value);
+    }
+
     public function getAmount()
     {
-        return $this->data['payed_amount'];
+        return $this->getParameter('payed_amount');
+    }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency',$value);
     }
 
     public function getCurrency()
     {
-        return $this->data['currency'];
+        return $this->getParameter('currency');
     }
 
     public function setApiKey($value)
@@ -69,14 +105,24 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('secretKey');
     }
 
+    public function setHeader($value)
+    {
+        return $this->setParameter('header',$value);
+    }
+
     public function getHeader()
     {
-        return $this->data['header'];
+        return $this->getParameter('header');
+    }
+
+    public function setDescription($value)
+    {
+        return $this->setParameter('description',$value);
     }
 
     public function getDescription()
     {
-        return $this->data['description'];
+        return $this->getParameter('description');
     }
 
     public function check()
@@ -113,13 +159,13 @@ class CompletePurchaseRequest extends AbstractRequest
     public function checkSign()
     {
 
-        $sign = $this->getSign();
+        $sign = $this->processSign();
 
-        return ($sign === $this->data['sign']);
+        return ($sign === $this->getSign());
 
     }
 
-    public function getSign()
+    public function processSign()
     {
 
         return hash_hmac(
@@ -133,13 +179,13 @@ class CompletePurchaseRequest extends AbstractRequest
     public function checkSign2(): bool
     {
 
-        $sign = $this->getSign2();
+        $sign = $this->processSign2();
 
-        return ($sign === $this->data['sign_2']);
+        return ($sign === $this->getSign2());
 
     }
 
-    public function getSign2()
+    public function processSign2()
     {
 
         return hash_hmac(
@@ -169,12 +215,5 @@ class CompletePurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         return $this;
-    }
-
-    public function getData()
-    {
-        if (isset($this->data['id'])){
-            $this->setParameter('invoiceId',$this->data['id']);
-        }
     }
 }
