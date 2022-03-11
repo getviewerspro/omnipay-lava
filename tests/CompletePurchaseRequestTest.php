@@ -19,11 +19,6 @@ class CompletePurchaseRequestTest extends TestCase {
         $this->response->initialize([
             'apiKey' => '1234',
             'secretKey' => '4321',
-            'transactionId' => '321dd',
-            'currency' => 'RUB',
-            'amount' => 5000,
-            'description' => 'buy something special',
-            'header' => 'Company name',
         ]);
 
         $this->response->data = json_decode(file_get_contents(__DIR__ . "\Mock\invoiceWebhook.json"),1);
@@ -31,6 +26,13 @@ class CompletePurchaseRequestTest extends TestCase {
     }
 
     public function testResponseSign() {
+
+        $this->response->setRequestData([
+            'currency' => 'RUB',
+            'amount' => 5000,
+            'description' => 'buy something special',
+            'header' => 'Company name',
+        ]);
 
         $this->response->checkString = $this->response->prepareSignString();
 
@@ -41,7 +43,12 @@ class CompletePurchaseRequestTest extends TestCase {
 
     public function testResponseSignException() {
 
-        $this->response->setHeader('wrong header');
+        $this->response->setRequestData([
+            'currency' => 'RUB',
+            'amount' => 5000,
+            'description' => 'buy something special',
+            'header' => 'wrong header',
+        ]);
 
         $this->expectException(InvalidResponseException::class);
 
@@ -51,6 +58,13 @@ class CompletePurchaseRequestTest extends TestCase {
 
     public function testIsSuccessfulTrue()
     {
+        $this->response->setRequestData([
+            'currency' => 'RUB',
+            'amount' => 5000,
+            'description' => 'buy something special',
+            'header' => 'Company name',
+        ]);
+
         $this->assertTrue($this->response->isSuccessful());
     }
 

@@ -9,20 +9,7 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public $data;
     public $checkString;
-
-    /**
-     * @throws InvalidResponseException
-     */
-    public function getData()
-    {
-
-        if (isset($this->data['id'])){
-            $this->setParameter('invoiceId',$this->data['id']);
-        }
-
-        $this->check();
-
-    }
+    public $requestData;
 
     public function send() {
 
@@ -46,7 +33,10 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function getTransactionId()
     {
-        return $this->getParameter('transactionId');
+
+        $additionalData = json_decode($this->data['data'],1);
+
+        return $additionalData['transactionId'];
     }
 
     public function getAmount()
@@ -79,9 +69,14 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('secretKey');
     }
 
-    public function setHeader($value)
+    public function getHeader()
     {
-        return$this->setParameter('header',$value);
+        return $this->data['header'];
+    }
+
+    public function getDescription()
+    {
+        return $this->data['description'];
     }
 
     public function check()
@@ -95,13 +90,21 @@ class CompletePurchaseRequest extends AbstractRequest
 
     }
 
+    public function setRequestData($value) {
+
+        $this->requestData = $value;
+
+        return $this;
+
+    }
+
     public function prepareSignString(): string
     {
 
-        $return = $this->getParameter('currency');
-        $return .= $this->getParameter('amount');
-        $return .= $this->getParameter('header');
-        $return .= $this->getParameter('description');
+        $return = $this->requestData['currency'];
+        $return .= $this->requestData['amount'];
+        $return .= $this->requestData['header'];
+        $return .= $this->requestData['description'];
 
         return $return;
 
@@ -154,6 +157,8 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function isSuccessful()
     {
+        $this->check();
+
         if (!isset($this->data['error'])) {
             return $this->data['payed'];
         } else {
@@ -164,5 +169,12 @@ class CompletePurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         return $this;
+    }
+
+    public function getData()
+    {
+        if (isset($this->data['id'])){
+            $this->setParameter('invoiceId',$this->data['id']);
+        }
     }
 }
