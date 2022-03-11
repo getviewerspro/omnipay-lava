@@ -2,9 +2,6 @@
 
 namespace Omnipay\bitBanker;
 
-use Omnipay\bitBanker\Message\Notification;
-use Omnipay\Common\Message\NotificationInterface;
-use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Tests\GatewayTestCase;
 
 class GatewayTest extends GatewayTestCase
@@ -108,29 +105,6 @@ class GatewayTest extends GatewayTestCase
         $request = $this->gateway->createInvoice($this->options);
 
         $this->assertTrue($request->getTestMode());
-
-    }
-
-    public function testSupportsCompletePurchase()
-    {
-        $supportsCompletePurchase = $this->gateway->supportsCompletePurchase();
-        $this->assertIsBool($supportsCompletePurchase);
-
-        if ($supportsCompletePurchase) {
-            $this->assertInstanceOf(NotificationInterface::class, $this->gateway->completePurchase());
-        } else {
-            $this->assertFalse(method_exists($this->gateway, 'completePurchase'));
-        }
-    }
-
-    public function testCompletePurchase() {
-
-        $response = $this->gateway->completePurchase();
-
-        $response->data = json_decode(file_get_contents(__DIR__ . "\Mock\invoiceWebhook.json"),1);
-        $data = json_decode(file_get_contents(__DIR__ . "\Mock\invoiceWebhook.json"),1);
-
-        $this->assertEquals($response->data,$data);
 
     }
 

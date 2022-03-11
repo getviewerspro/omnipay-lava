@@ -2,6 +2,7 @@
 
 namespace Omnipay\bitBanker;
 
+use Omnipay\bitBanker\Message\CompletePurchaseRequest;
 use Omnipay\bitBanker\Message\Notification;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\bitBanker\Message\InvoiceRequest;
@@ -60,9 +61,9 @@ class Gateway extends AbstractGateway
         return $this->responseHandler($options);
     }
 
-    public function completePurchase(array $options = array()): \Omnipay\Common\Message\NotificationInterface
+    public function completePurchase(array $options = array()): \Omnipay\Common\Message\RequestInterface
     {
-        return $this->responseHandler($options);
+        return $this->createRequest(CompletePurchaseRequest::class, $options);
     }
 
     private function  responseHandler(array $options = array())
