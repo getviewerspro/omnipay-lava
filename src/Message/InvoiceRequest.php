@@ -21,7 +21,8 @@ class InvoiceRequest extends AbstractRequest
             'amount',
             'header',
             'is_convert_payments',
-            'apiKey'
+            'apiKey',
+            'transactionId'
         );
 
         $this->sign()->prepareRequest();
@@ -118,7 +119,10 @@ class InvoiceRequest extends AbstractRequest
             'header' => $data['header'],
             'is_convert_payments' => $data['is_convert_payments'],
             'description' => $data['description'],
-            'sign' => $data['sign']
+            'sign' => $data['sign'],
+            'data' => json_encode([
+                'transactionId' => $data['transactionId']
+            ])
         ];
     }
 

@@ -46,26 +46,19 @@ $gateway = Omnipay::create('bitBanker');
 $gateway->setApiKey('1234')
         ->setSecretKey('4321');
         
-$response = $gateway->completePurchase();
-
-//Получение ID счета;
-$response->getTransactionId();
-
 //Данные которые использовались при создании счета
-$response->setRequestData([
+$response = $gateway->completePurchase([
+    "transactionId" => "321dd",
     "currency" => "RUB",
     "amount" => 5000,
     "description" => "покупка ноутбука модель ACer..",
     "header" => "Фирма",
 ]);
 
-//Проверка подписей
-if ($response->check()) {
+$response->getTransactionId();
 
-    if ($response->isSuccessful()) {
-        print_r($response->getAmount());
-        print_r($response->getCurrency());
-    }
-
+if ($response->isSuccessful()) {
+    print_r($response->getAmount());
+    print_r($response->getCurrency());
 }
 ```
