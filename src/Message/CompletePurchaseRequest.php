@@ -74,6 +74,11 @@ class CompletePurchaseRequest extends AbstractRequest
     {
         return $this->getParameter('payed_amount');
     }
+    
+    public function getMoney()
+    {
+        return NULL;
+    }
 
     public function setCurrency($value)
     {
