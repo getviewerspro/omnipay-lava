@@ -120,9 +120,9 @@ class InvoiceRequest extends AbstractRequest
             'is_convert_payments' => $data['is_convert_payments'],
             'description' => $data['description'],
             'sign' => $data['sign'],
-            'data' => json_encode([
+            'data' => (object) [
                 'transactionId' => $data['transactionId']
-            ])
+            ]
         ];
     }
 
