@@ -10,7 +10,15 @@ class InvoiceResponse extends AbstractResponse
     public function isSuccessful()
     {
 
-        return ($this->data['result'] == 'success');
+        $result = false;
+
+        if (isset($this->data['result'])) {
+            if ($this->data['result'] == 'success') {
+                $result = true;
+            }
+        }
+
+        return $result;
 
     }
 
