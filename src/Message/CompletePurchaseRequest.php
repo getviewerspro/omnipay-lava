@@ -33,7 +33,7 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function setData($value)
     {
-        return $this->setParameter('data',json_decode($value,1));
+        return $this->setParameter('data',$value);
     }
 
     public function setSign($value) {
@@ -62,7 +62,7 @@ class CompletePurchaseRequest extends AbstractRequest
 
         $additionalData = $this->getData();
 
-        return $additionalData['transactionId'];
+        return $additionalData['transactionId'] ?? null;
     }
 
     public function setAmount($value)
