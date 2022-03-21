@@ -37,8 +37,6 @@ class CompletePurchaseRequestTest extends TestCase {
             'sign2' => '36a78bb6d755027672500fbf5850e38232f2e9fe948292d92ceb55db5ddcba91'
         ]);
 
-        $this->response->data = json_decode(file_get_contents(__DIR__ . "\Mock\invoiceWebhook.json"),1);
-
     }
 
     public function testResponseSign() {
