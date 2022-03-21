@@ -13,8 +13,6 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function send() {
 
-        $this->data = json_decode(file_get_contents('php://input'),1);
-
         $this->getData();
 
         return $this;
@@ -33,7 +31,12 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function setData($value)
     {
-        return $this->setParameter('data',json_decode($value,1));
+        return $this->setParameter('data',$value);
+    }
+
+    public function setTransactions($value)
+    {
+        return $this->setParameter('transactions',$value);
     }
 
     public function setSign($value) {
@@ -44,7 +47,7 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('sign');
     }
 
-    public function setSign2($value) {
+    public function setSign_2($value) {
         return $this->setParameter('sign2',$value);
     }
 
@@ -62,12 +65,32 @@ class CompletePurchaseRequest extends AbstractRequest
 
         $additionalData = $this->getData();
 
-        return $additionalData['transactionId'];
+        return $additionalData['transactionId'] ?? null;
     }
 
     public function setAmount($value)
     {
         return $this->setParameter('payed_amount',$value);
+    }
+
+    public function setPayed($value)
+    {
+        return $this->setParameter('payed',$value);
+    }
+
+    public function getPayed()
+    {
+        return $this->getParameter('payed');
+    }
+
+    public function setError($value)
+    {
+        return $this->setParameter('error',$value);
+    }
+
+    public function getError()
+    {
+        return $this->getParameter('error');
     }
 
     public function getAmount()
@@ -210,8 +233,8 @@ class CompletePurchaseRequest extends AbstractRequest
     {
         $this->check();
 
-        if (!isset($this->data['error'])) {
-            return $this->data['payed'];
+        if ($this->getError() == null) {
+            return $this->getPayed();
         } else {
             return false;
         }
