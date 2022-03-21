@@ -47,7 +47,7 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('sign');
     }
 
-    public function setSign2($value) {
+    public function setSign_2($value) {
         return $this->setParameter('sign2',$value);
     }
 

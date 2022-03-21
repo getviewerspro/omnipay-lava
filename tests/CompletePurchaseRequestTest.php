@@ -34,7 +34,7 @@ class CompletePurchaseRequestTest extends TestCase {
             ],
             'data' => ["transactionId" => "321dd"],
             'sign' => 'c3987f9054d09f590f00a93d3f388f62c671f6109cf9f85df4eff329bae6c818',
-            'sign2' => '36a78bb6d755027672500fbf5850e38232f2e9fe948292d92ceb55db5ddcba91'
+            'sign_2' => '36a78bb6d755027672500fbf5850e38232f2e9fe948292d92ceb55db5ddcba91'
         ]);
 
     }
