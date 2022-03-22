@@ -13,8 +13,6 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function send() {
 
-        $this->getData();
-
         return $this;
 
     }
@@ -32,6 +30,11 @@ class CompletePurchaseRequest extends AbstractRequest
     public function setData($value)
     {
         return $this->setParameter('data',$value);
+    }
+
+    public function getData()
+    {
+        return $this->getParameter('data');
     }
 
     public function setTransactions($value)
@@ -53,11 +56,6 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function getSign2() {
         return $this->getParameter('sign2');
-    }
-
-    public function getData()
-    {
-        return $this->getParameter('data');
     }
 
     public function getTransactionId()
@@ -159,21 +157,15 @@ class CompletePurchaseRequest extends AbstractRequest
 
     }
 
-    public function setRequestData($value) {
-
-        $this->requestData = $value;
-
-        return $this;
-
-    }
-
     public function prepareSignString(): string
     {
 
-        $return = $this->requestData['currency'];
-        $return .= $this->requestData['amount'];
-        $return .= $this->requestData['header'];
-        $return .= $this->requestData['description'];
+        $additionalData = $this->getData();
+
+        $return = $additionalData['currency'] ?? null;
+        $return .= $additionalData['amount'] ?? null;
+        $return .= $additionalData['header'] ?? null;
+        $return .= $additionalData['description'] ?? null;
 
         return $return;
 
