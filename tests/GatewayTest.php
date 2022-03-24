@@ -23,7 +23,8 @@ class GatewayTest extends GatewayTestCase
             "description" => "buy something special",
             "header" => "Company name",
             "is_convert_payments" => false,
-            "testMode" => true
+            "testMode" => true,
+            "transactionId" => '123'
         ];
     }
 
@@ -55,7 +56,13 @@ class GatewayTest extends GatewayTestCase
 
         $data = $this->options;
         unset($data['testMode']);
+        unset($data['transactionId']);
         $data['sign'] = $this->prepareTestSignWithApiKey();
+        $data['data'] = (object) [
+            "transactionId" => '123',
+            "header" => "Company name",
+            "description" => "buy something special"
+        ];
 
         $this->gateway->setApiKey("1234");
 

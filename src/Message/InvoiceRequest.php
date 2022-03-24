@@ -121,7 +121,9 @@ class InvoiceRequest extends AbstractRequest
             'description' => $data['description'],
             'sign' => $data['sign'],
             'data' => (object) [
-                'transactionId' => $data['transactionId']
+                'transactionId' => $data['transactionId'],
+                'header' => $data['header'],
+                'description' => $data['description']
             ]
         ];
     }
