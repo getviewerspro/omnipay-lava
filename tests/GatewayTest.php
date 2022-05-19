@@ -61,7 +61,9 @@ class GatewayTest extends GatewayTestCase
         $data['data'] = (object) [
             "transactionId" => '123',
             "header" => "Company name",
-            "description" => "buy something special"
+            "description" => "buy something special",
+            'currency' => 'RUB',
+            'amount' => '5000'
         ];
 
         $this->gateway->setApiKey("1234");
