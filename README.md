@@ -1,64 +1,33 @@
-```php
-    composer require league/omnipay alekseyblymin/omnipay-bitbanker
+# Omnipay: Lava
+
+**Digiseller driver for Omnipay PHP payment library**
+
+[Omnipay](https://github.com/omnipay/omnipay) is a framework agnostic, multi-gateway payment
+processing library for PHP 5.3+.
+
+This package implements [Lava](https://lava.ru/) support for Omnipay.
+
+## Installation
+
+The preferred way to install this library is through [composer](https://getcomposer.org/download/).
+
+Either run
+
+```sh
+php composer.phar require "getviewerspro/omnipay-lava"
 ```
 
-# Примеры использования
+or add
 
-## Создание счета
-```php
-use Omnipay\Omnipay;
-
-$gateway = Omnipay::create('bitBanker');
-
-$gateway->setApiKey('1234');
-
-//Включение тестового режима
-$gateway->setTestMode(true);
-
-$response = $gateway->purchase([
-    "payment_currencies" => ["BTC"],
-    "currency" => "RUB",
-    "amount" => 5000,
-    "description" => "покупка ноутбука модель ACer..",
-    "header" => "Фирма",
-    "is_convert_payments" => false,
-    "data" => "{}",
-])->send();
-
-if ($response->isSuccessful()){
-
-    echo $response->getInvoiceId();
-    echo $response->getInvoiceLink();
-    
-} else {
-
-    echo $response->getMessage();
-    
-}
+```json
+"getviewerspro/omnipay-lava": "*"
 ```
 
-## Получение статуса платежа через вебхук
-```php
-use Omnipay\Omnipay;
+to the require section of your composer.json.
 
-$gateway = Omnipay::create('bitBanker');
+## License
 
-$gateway->setApiKey('1234')
-        ->setSecretKey('4321');
-        
-//Данные которые использовались при создании счета
-$response = $gateway->completePurchase([
-    "transactionId" => "321dd",
-    "currency" => "RUB",
-    "amount" => 5000,
-    "description" => "покупка ноутбука модель ACer..",
-    "header" => "Фирма",
-]);
+This project is released under the terms of the MIT [license](LICENSE).
+Read more [here](https://choosealicense.com/licenses/mit).
 
-$response->getTransactionId();
-
-if ($response->isSuccessful()) {
-    print_r($response->getAmount());
-    print_r($response->getCurrency());
-}
-```
+Copyright © 2023, getViewersPRO (https://getviewers.pro/)
