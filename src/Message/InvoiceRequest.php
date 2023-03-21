@@ -25,7 +25,7 @@ class InvoiceRequest extends AbstractRequest
     public function sendData($result)
     {
         $this->response = new InvoiceResponse($this,$result);
-        info($this->response->status(), json_encode($this->response->body()));
+        info(json_encode($this->response));
         return $this->response;
     }
 
