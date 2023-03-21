@@ -1,30 +1,25 @@
 {
-    "name": "getviewerspro/omnipay-bitbanker",
-    "description": "bitbanker gateway for Omnipay",
+    "name": "getviewerspro/omnipay-lava",
     "type": "library",
-    "require": {
-        "league/omnipay": "^3.0",
-      "ext-json": "*"
-    },
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Omnipay\\bitBanker\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "AlekseyBlymin",
-            "email": "alexei.blymin@yandex.ru"
-        }
-    ],
+    "description": "Lava driver for Omnipay PHP payment library",
     "keywords": [
-        "bitbanker",
-        "api",
+        "php",
+        "omnipay",
+        "lava",
+        "merchant",
         "payment"
     ],
+    "homepage": "https://github.com/getviewerspro/omnipay-lava",
+    "license": "MIT",
+    "require": {
+        "omnipay/common": "^3.0"
+    },
     "require-dev": {
-        "omnipay/tests": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "omnipay/tests": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\Lava\\": "src"
+        }
     }
 }

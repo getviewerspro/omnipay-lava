@@ -30,7 +30,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
 
     public function getInvoiceLink()
     {
-        return $this->data['link'];
+        return $this->data['url'];
     }
 
     public function getMessage()

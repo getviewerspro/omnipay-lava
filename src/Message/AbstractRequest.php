@@ -6,14 +6,12 @@ use Omnipay\Common\Message\AbstractRequest as Request;
 
 abstract class AbstractRequest extends Request
 {
-
     protected $method = "";
     protected $productionUri = "";
-    protected $testUri       = "";
 
     public function getEndpoint()
     {
-        return $this->getTestMode() ? $this->testUri : $this->productionUri;
+        return $this->productionUri;
     }
 
     public function setHeaders($value) {
@@ -24,14 +22,40 @@ abstract class AbstractRequest extends Request
         return $this->getParameter('headers');
     }
 
+    public function setSign($value) {
+        return $this->setParameter('sign', $value);
+    }
+
+    public function getSign() {
+        return $this->getParameter('sign');
+    }
+
     public function setApiKey($value)
     {
-        return $this->setParameter("apiKey",$value);
+        return $this->setParameter("apiKey", $value);
     }
 
     public function getApiKey()
     {
         return $this->getParameter("apiKey");
+    }
+
+    public function setShopId($value)
+    {
+        return $this->setParameter("shopId", $value);
+    }
+
+    public function getShopId() {
+        return $this->getParameter('shopId');
+    }
+
+    public function setPaymentMethods($value)
+    {
+        return $this->setParameter("includeService", $value);
+    }
+
+    public function getPaymentMethods() {
+        return $this->getParameter('includeService');
     }
 
     public function send()
