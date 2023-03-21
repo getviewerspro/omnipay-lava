@@ -24,7 +24,9 @@ class InvoiceRequest extends AbstractRequest
 
     public function sendData($result)
     {
-        return $this->response = new InvoiceResponse($this,$result);
+        $this->response = new InvoiceResponse($this,$result);
+        info(json_encode($this->response));
+        return $this->response;
     }
 
     public function sign() {
@@ -33,7 +35,7 @@ class InvoiceRequest extends AbstractRequest
             hash_hmac(
                 'sha256',
                 $this->prepareSignString(),
-                $this->getApiKey()
+                $this->getSecretKey()
             )
         );
 
