@@ -16,8 +16,7 @@ class InvoiceRequest extends AbstractRequest
     {
         $this->validate(
             'amount',
-            'transactionId',
-            'sign',
+            'transactionId'
         );
 
         return $this->sign()->prepareRequestBody();
