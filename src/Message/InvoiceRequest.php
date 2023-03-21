@@ -51,15 +51,15 @@ class InvoiceRequest extends AbstractRequest
 
         $data = $this->parameters->all();
 
-        $return =  [
+        $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
             'shopId'            => $this->getShopId(),
             'includeService'    => $this->getPaymentMethods(),
             'comment'           => $this->getDescription(),
-        ];
+        ]);
         
-        info($return);
+        info([$return, $this->getSign()]);
         
         return $return;
     }
