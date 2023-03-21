@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\bitBanker\Message;
+namespace Omnipay\Lava\Message;
 
 use Omnipay\Common\Exception\InvalidResponseException;
 
