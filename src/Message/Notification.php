@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\bitBanker\Message;
+namespace Omnipay\Lava\Message;
 
 use GuzzleHttp\Psr7\Response;
 use Omnipay\Common\Helper;
