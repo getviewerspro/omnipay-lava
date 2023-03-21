@@ -47,7 +47,7 @@ class InvoiceRequest extends AbstractRequest
 
     private function prepareRequestBody()
     {
-        info($this->getSign());
+        info($this->getSign(), $this->getShopId(), $this->getTransactionId());
 
         $this->setHeaders([
             "signature" => $this->getSign()
