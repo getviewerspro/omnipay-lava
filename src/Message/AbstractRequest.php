@@ -86,7 +86,7 @@ abstract class AbstractRequest extends Request
           $this->method,
           $this->getEndpoint(),
           $this->getHeaders(),
-          json_encode($data)
+          $data
         );
     }
 
