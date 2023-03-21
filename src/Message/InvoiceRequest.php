@@ -24,9 +24,7 @@ class InvoiceRequest extends AbstractRequest
 
     public function sendData($result)
     {
-        $this->response = new InvoiceResponse($this,$result);
-        info(json_encode($this->response));
-        return $this->response;
+        return new InvoiceResponse($this,$result);
     }
 
     public function sign() {
@@ -47,8 +45,6 @@ class InvoiceRequest extends AbstractRequest
 
     private function prepareRequestBody()
     {
-        info([$this->getSign(), $this->getShopId(), $this->getTransactionId()]);
-
         $this->setHeaders([
             "signature" => $this->getSign()
         ]);
