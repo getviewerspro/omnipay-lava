@@ -10,11 +10,10 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
 
     public function isSuccessful()
     {
-
         $result = false;
 
         if (isset($this->data['result'])) {
-            if ($this->data['result'] == 'success') {
+            if ($this->data['result'] == 0) {
                 $result = true;
             }
         }
@@ -35,14 +34,12 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
 
     public function getMessage()
     {
-
         return $this->data;
-
     }
     
     public function isRedirect()
     {
-        return true;
+        return $this->isSuccessful();
     }
 
     public function getRedirectUrl()
