@@ -30,16 +30,26 @@ abstract class AbstractRequest extends Request
         return $this->getParameter('sign');
     }
 
-    public function setApiKey($value)
+    public function setSecretKey($value)
     {
-        return $this->setParameter("apiKey", $value);
+        return $this->setParameter("secretKey",$value);
     }
 
-    public function getApiKey()
+    public function getSecretKey()
     {
-        return $this->getParameter("apiKey");
+        return $this->getParameter("secretKey");
     }
 
+    public function setSecretKeyAdd($value)
+    {
+        return $this->setParameter("secretKeyAdd",$value);
+    }
+
+    public function getSecretKeyAdd()
+    {
+        return $this->getParameter("secretKeyAdd");
+    }
+    
     public function setShopId($value)
     {
         return $this->setParameter("shopId", $value);

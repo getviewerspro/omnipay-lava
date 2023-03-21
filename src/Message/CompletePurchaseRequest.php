@@ -65,16 +65,6 @@ class CompletePurchaseRequest extends AbstractRequest
         return NULL;
     }
 
-    public function setPayed($value)
-    {
-        return $this->setParameter('payed',$value);
-    }
-
-    public function getPayed()
-    {
-        return $this->getParameter('payed');
-    }
-
     public function setError($value)
     {
         return $this->setParameter('error',$value);
@@ -88,36 +78,6 @@ class CompletePurchaseRequest extends AbstractRequest
     public function setCurrency($value)
     {
         return $this->setParameter('currency',$value);
-    }
-
-    public function setApiKey($value)
-    {
-        return $this->setParameter('apiKey',$value);
-    }
-
-    public function getApiKey()
-    {
-        return $this->getParameter('apiKey');
-    }
-
-    public function setSecretKey($value)
-    {
-        return $this->setParameter('secretKey',$value);
-    }
-
-    public function getSecretKey()
-    {
-        return $this->getParameter('secretKey');
-    }
-
-    public function setHeader($value)
-    {
-        return $this->setParameter('header',$value);
-    }
-
-    public function getHeader()
-    {
-        return $this->getParameter('header');
     }
 
     public function setDescription($value)
