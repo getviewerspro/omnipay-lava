@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnipay\bitBanker;
+namespace Omnipay\Lava;
 
-use Omnipay\bitBanker\Message\CompletePurchaseRequest;
-use Omnipay\bitBanker\Message\Notification;
+use Omnipay\Lava\Message\CompletePurchaseRequest;
+use Omnipay\Lava\Message\Notification;
 use Omnipay\Common\AbstractGateway;
-use Omnipay\bitBanker\Message\InvoiceRequest;
+use Omnipay\Lava\Message\InvoiceRequest;
 
 
 class Gateway extends AbstractGateway
@@ -13,7 +13,7 @@ class Gateway extends AbstractGateway
 
     public function getName()
     {
-        return "bitBanker";
+        return "Lava";
     }
 
     public function getDefaultParameters()

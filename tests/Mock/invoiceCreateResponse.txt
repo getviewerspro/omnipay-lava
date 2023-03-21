@@ -2,4 +2,4 @@ HTTP/1.1 200 OK
 Cache-control: no-cache="set-cookie"
 Content-Type: application/json; charset=utf-8
 
-{"result":"success","id":"123456qwerty","link":"https:\/\/app.bitbanker.ru\/external\/invoice\/123456qwerty"}
+{"id":"01fc840d-a0b1-43ca-b65d-ca713d8a1f95","amount":300,"expired":"2022-11-07 13:46:37","status":0,"shop_id":123456,"url":"https:\/\/pay.lava.ru\/invoice\/01fc840d-a0b1-43ca-b65d-ca713d8a1f95", "comment":null,"merchantName":"name","exclude_service":null,"include_service":null}

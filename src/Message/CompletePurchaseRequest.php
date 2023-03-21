@@ -19,27 +19,22 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function setInvoiceId($value)
     {
-        return $this->setParameter('invoiceId',$value);
+        return $this->setParameter('invoice_id',$value);
     }
 
     public function getInvoiceId()
     {
-        return $this->getParameter('invoiceId');
+        return $this->getParameter('invoice_id');
     }
 
     public function setData($value)
     {
-        return $this->setParameter('data',$value);
+        return $this->setParameter('custom_fields',$value);
     }
 
     public function getData()
     {
-        return $this->getParameter('data');
-    }
-
-    public function setTransactions($value)
-    {
-        return $this->setParameter('transactions',$value);
+        return $this->getParameter('custom_fields');
     }
 
     public function setSign($value) {
@@ -50,25 +45,24 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('sign');
     }
 
-    public function setSign_2($value) {
-        return $this->setParameter('sign2',$value);
-    }
-
-    public function getSign2() {
-        return $this->getParameter('sign2');
-    }
-
     public function getTransactionId()
     {
-
-        $additionalData = $this->getData();
-
-        return $additionalData['transactionId'] ?? null;
+        return $this->getParameter('order_id');
     }
 
     public function setAmount($value)
     {
-        return $this->setParameter('payed_amount',$value);
+        return $this->setParameter('amount',$value);
+    }
+
+    public function getAmount()
+    {
+        return $this->getParameter('amount');
+    }
+    
+    public function getMoney()
+    {
+        return NULL;
     }
 
     public function setPayed($value)
@@ -91,24 +85,9 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->getParameter('error');
     }
 
-    public function getAmount()
-    {
-        return $this->getParameter('payed_amount');
-    }
-    
-    public function getMoney()
-    {
-        return NULL;
-    }
-
     public function setCurrency($value)
     {
         return $this->setParameter('currency',$value);
-    }
-
-    public function getCurrency()
-    {
-        return $this->getParameter('currency');
     }
 
     public function setApiKey($value)
@@ -162,18 +141,27 @@ class CompletePurchaseRequest extends AbstractRequest
 
     }
 
-    public function prepareSignString(): string
+    public function prepareSignString() {
+        return json_encode($this->prepareRequestBody(),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+    } 
+
+    private function prepareRequestBody()
     {
+        info($this->getSign());
 
-        $additionalData = $this->getData();
+        $this->setHeaders([
+            "signature" => $this->getSign()
+        ]);
 
-        $return = $additionalData['currency'] ?? null;
-        $return .= $additionalData['amount'] ?? null;
-        $return .= $additionalData['header'] ?? null;
-        $return .= $additionalData['description'] ?? null;
+        $data = $this->parameters->all();
 
-        return $return;
-
+        return array_filter([
+            'sum'               => $this->getAmount(),
+            'orderId'           => $this->getTransactionId(),
+            'shopId'            => $this->getShopId(),
+            'includeService'    => $this->getPaymentMethods(),
+            'comment'           => $this->getDescription(),
+        ]);
     }
 
     public function checkSign()
