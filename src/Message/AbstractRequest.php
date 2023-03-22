@@ -81,13 +81,26 @@ abstract class AbstractRequest extends Request
     
     protected function getClient($data)
     {        
-        
+        $httpRequest = $this->httpClient->createRequest(
+            'POST',
+            $this->getEndpoint(),
+            null,
+            $data
+        );
+
+        $httpResponse = $httpRequest
+            ->setHeader('Signature', $this->getSign())
+            ->send();
+
+        return $this->response;
+             
+        /*
         info($this->getHeaders());
         
         $httpResponse = $this->httpClient->post($this->endpoint, $this->getHeaders(), $data)->send();
 
         return $this->createResponse($httpResponse->json());
-        /*
+        
         return $this->httpClient->request(
           $this->method,
           $this->getEndpoint(),
