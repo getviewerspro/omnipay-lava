@@ -83,8 +83,6 @@ abstract class AbstractRequest extends Request
     {        
         $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
-        $signature = hash_hmac('sha256', $data, $secretKey);
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
