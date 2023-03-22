@@ -75,39 +75,34 @@ abstract class AbstractRequest extends Request
         info($data);
         
         $response = $this->getClient($data);
-        $result = json_decode($response->getBody()->getContents(),1);
+        $result = json_decode($response->getBody()->getContents(), 1);
         return $this->sendData($result);
     }
     
     protected function getClient($data)
     {        
-        $httpRequest = $this->httpClient->createRequest(
-            'POST',
-            $this->getEndpoint(),
-            null,
-            $data
-        );
+        $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
-        $httpResponse = $httpRequest
-            ->setHeader('Signature', $this->getSign())
-            ->send();
+        $signature = hash_hmac('sha256', $data, $secretKey);
 
-        return $this->response;
-             
-        /*
-        info($this->getHeaders());
-        
-        $httpResponse = $this->httpClient->post($this->endpoint, $this->getHeaders(), $data)->send();
+        $curl = curl_init();
 
-        return $this->createResponse($httpResponse->json());
-        
-        return $this->httpClient->request(
-          $this->method,
-          $this->getEndpoint(),
-          $this->getHeaders(),
-          json_encode($data)
-        );
-        */
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->getEndpoint(), 
+            CURLOPT_RETURNTRANSFER => true, CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_FOLLOWLOCATION => true, 
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
+            CURLOPT_CUSTOMREQUEST => 'POST', 
+            CURLOPT_POSTFIELDS => $data, 
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->getSign()
+                ), ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
     }
 
 }
