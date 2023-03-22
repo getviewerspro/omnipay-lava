@@ -103,6 +103,8 @@ abstract class AbstractRequest extends Request
             $response = curl_exec($curl);
 
             curl_close($curl);
+        
+        return $curl;
     }
 
 }
