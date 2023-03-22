@@ -68,6 +68,7 @@ abstract class AbstractRequest extends Request
         return $this->getParameter('includeService');
     }
 
+    /*
     public function send()
     {
         $data = $this->getData();
@@ -87,5 +88,6 @@ abstract class AbstractRequest extends Request
             ->withBody($data, 'application/json')
             ->post($this->getEndpoint());
     }
+    */
 
 }
