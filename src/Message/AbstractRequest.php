@@ -81,13 +81,11 @@ abstract class AbstractRequest extends Request
     }
 
     protected function getClient($data)
-    {
-        return $this->httpClient->request(
-          $this->method,
-          $this->getEndpoint(),
-          $this->getHeaders(),
-          $data
-        );
+    {      
+        return $this->httpClient
+            ->withHeaders($this->getHeaders())
+            ->withBody($data, 'application/json')
+            ->post($this->getEndpoint());
     }
 
 }
