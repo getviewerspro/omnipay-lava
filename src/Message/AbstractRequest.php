@@ -68,26 +68,22 @@ abstract class AbstractRequest extends Request
         return $this->getParameter('includeService');
     }
 
-    /*
     public function send()
     {
         $data = $this->getData();
-        info($data);
-
         $response = $this->getClient($data);
-
-        $result = json_decode($response->getBody()->getContents(), 1);
-
+        $result = json_decode($response->getBody()->getContents(),1);
         return $this->sendData($result);
     }
-
+    
     protected function getClient($data)
-    {      
-        return $this->httpClient
-            ->withHeaders($this->getHeaders())
-            ->withBody($data, 'application/json')
-            ->post($this->getEndpoint());
+    {
+        return $this->httpClient->request(
+          $this->method,
+          $this->getEndpoint(),
+          $this->getHeaders(),
+          json_encode($data)
+        );
     }
-    */
 
 }
