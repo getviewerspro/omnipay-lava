@@ -71,6 +71,9 @@ abstract class AbstractRequest extends Request
     public function send()
     {
         $data = $this->getData();
+        
+        info($data);
+        
         $response = $this->getClient($data);
         $result = json_decode($response->getBody()->getContents(),1);
         return $this->sendData($result);
