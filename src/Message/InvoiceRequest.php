@@ -83,7 +83,7 @@ class InvoiceRequest extends AbstractRequest
             CURLOPT_CUSTOMREQUEST => 'POST', 
             CURLOPT_POSTFIELDS => $data, 
             CURLOPT_HTTPHEADER => array(
-                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->getSign()
+                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->prepareSign()
                 ), ));
 
             $response = curl_exec($curl);
