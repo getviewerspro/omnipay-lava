@@ -19,7 +19,7 @@ class InvoiceRequest extends AbstractRequest
             'transactionId'
         );
 
-        return $this->prepareRequestBody();
+        return $this->prepareSign()->getRequestBody();
     }
 
     public function sendData($result)
@@ -27,7 +27,7 @@ class InvoiceRequest extends AbstractRequest
         return new InvoiceResponse($this, $result);
     }
 
-    private function prepareRequestBody()
+    private function getRequestBody()
     {
         $return =  array_filter([
             'sum'               => $this->getAmount(),
@@ -42,7 +42,7 @@ class InvoiceRequest extends AbstractRequest
 
     public function prepareSign() 
     {
-        $signStr = json_encode($this->prepareRequestBody(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        $signStr = json_encode($this->getRequestBody(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         
         return $this->setSign(
             hash_hmac(
