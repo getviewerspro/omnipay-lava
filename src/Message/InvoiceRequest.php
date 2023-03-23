@@ -29,8 +29,6 @@ class InvoiceRequest extends AbstractRequest
 
     private function prepareRequestBody()
     {
-        $data = $this->parameters->all();
-
         $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
@@ -38,8 +36,6 @@ class InvoiceRequest extends AbstractRequest
             'includeService'    => $this->getPaymentMethods(),
             'comment'           => $this->getDescription(),
         ]);
-        
-        info([$return, $this->getSign()]);
         
         return $return;
     }
@@ -72,6 +68,10 @@ class InvoiceRequest extends AbstractRequest
         $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
         $curl = curl_init();
+        
+        $sign = $this->getSign();
+        
+        info([$data,$sign]);
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => $this->getEndpoint(), 
@@ -83,12 +83,13 @@ class InvoiceRequest extends AbstractRequest
             CURLOPT_CUSTOMREQUEST => 'POST', 
             CURLOPT_POSTFIELDS => $data, 
             CURLOPT_HTTPHEADER => array(
-                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->prepareSign()
-                ), ));
+                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $sign
+            ), 
+        ));
 
-            $response = curl_exec($curl);
+        $response = curl_exec($curl);
 
-            curl_close($curl);
+        curl_close($curl);
         
         return $response;
     }
