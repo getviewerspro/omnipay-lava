@@ -37,6 +37,8 @@ class InvoiceRequest extends AbstractRequest
             'comment'           => $this->getDescription(),
         ]);
         
+        $return['customFields'] = $return;
+        
         return $return;
     }
 
