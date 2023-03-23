@@ -28,7 +28,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
-        $this->data    = $this->request->getApiData(); 
+        $this->data    = $this->request->getData(); 
 
         if ($this->getSign() !== $this->calculateSignature()) {
             throw new InvalidResponseException('Invalid hash');
@@ -77,7 +77,7 @@ class CompletePurchaseResponse extends AbstractResponse
         return hash_hmac(
                 'sha256',
                 $signStr,
-                $this->request->getSignAdd()
+                $this->request->getSecretKeyAdd()
             );
     }
 }
