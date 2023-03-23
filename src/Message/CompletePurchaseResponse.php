@@ -67,7 +67,7 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getSign()
     {
-        return $this->request()->header('Authorization');
+        return $this->request->header('Authorization');
     }
     
     public function calculateSignature()
