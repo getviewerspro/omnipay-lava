@@ -19,36 +19,16 @@ class InvoiceRequest extends AbstractRequest
             'transactionId'
         );
 
-        return $this->sign()->prepareRequestBody();
+        return $this->prepareRequestBody();
     }
 
     public function sendData($result)
     {
-        return new InvoiceResponse($this,$result);
+        return new InvoiceResponse($this, $result);
     }
-
-    public function sign() {
-
-        return $this->setSign(
-            hash_hmac(
-                'sha256',
-                $this->prepareSignString(),
-                $this->getSecretKey()
-            )
-        );
-
-    }
-
-    public function prepareSignString() {
-        return json_encode($this->prepareRequestBody(),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-    } 
 
     private function prepareRequestBody()
     {
-        $this->setHeaders([
-            "signature" => $this->getSign()
-        ]);
-
         $data = $this->parameters->all();
 
         $return =  array_filter([
@@ -62,6 +42,55 @@ class InvoiceRequest extends AbstractRequest
         info([$return, $this->getSign()]);
         
         return $return;
+    }
+
+    public function prepareSign() 
+    {
+        $signStr = json_encode($this->prepareRequestBody(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        
+        return $this->setSign(
+            hash_hmac(
+                'sha256',
+                $signStr,
+                $this->getSecretKey()
+            )
+        );
+    }
+    
+    public function send()
+    {
+        $data = $this->getData();
+        
+        $response = $this->getClient($data);
+        $result = json_decode($response, 1);
+        
+        return $this->sendData($result);
+    }
+    
+    protected function getClient($data)
+    {        
+        $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->getEndpoint(), 
+            CURLOPT_RETURNTRANSFER => true, CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_FOLLOWLOCATION => true, 
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
+            CURLOPT_CUSTOMREQUEST => 'POST', 
+            CURLOPT_POSTFIELDS => $data, 
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->getSign()
+                ), ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+        
+        return $response;
     }
 
 }
