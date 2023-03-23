@@ -68,39 +68,4 @@ abstract class AbstractRequest extends Request
         return $this->getParameter('includeService');
     }
 
-    public function send()
-    {
-        $data = $this->getData();
-        
-        $response = $this->getClient($data);
-        $result = json_decode($response, 1);
-        return $this->sendData($result);
-    }
-    
-    protected function getClient($data)
-    {        
-        $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->getEndpoint(), 
-            CURLOPT_RETURNTRANSFER => true, CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 5,
-            CURLOPT_FOLLOWLOCATION => true, 
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
-            CURLOPT_CUSTOMREQUEST => 'POST', 
-            CURLOPT_POSTFIELDS => $data, 
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json', 'Content-Type: application/json', 'Signature: ' . $this->getSign()
-                ), ));
-
-            $response = curl_exec($curl);
-
-            curl_close($curl);
-        
-        return $response;
-    }
-
 }
