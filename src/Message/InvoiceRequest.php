@@ -40,8 +40,6 @@ class InvoiceRequest extends AbstractRequest
             'comment'           => $this->getDescription(),
         ]);
         
-        dd($return, $this->getPaymentMethod(), $this->getPaymentMethods());
-        
         $return['customFields'] = json_encode($return);
         
         return $return;
