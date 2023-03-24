@@ -20,6 +20,8 @@ class InvoiceRequest extends AbstractRequest
             'amount',
             'transactionId'
         );
+        
+        dd($this->getPaymentMethod());
 
         return $this->prepareSign()->getRequestBody();
     }
