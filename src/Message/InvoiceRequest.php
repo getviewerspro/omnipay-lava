@@ -15,6 +15,8 @@ class InvoiceRequest extends AbstractRequest
     public function getData()
     {
         $this->validate(
+            'shopId',
+            'secretKey',
             'amount',
             'transactionId'
         );
@@ -37,7 +39,7 @@ class InvoiceRequest extends AbstractRequest
             'comment'           => $this->getDescription(),
         ]);
         
-        $return['customFields'] = $return;
+        $return['customFields'] = json_encode($return);
         
         return $return;
     }
