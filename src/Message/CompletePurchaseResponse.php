@@ -30,7 +30,7 @@ class CompletePurchaseResponse extends AbstractResponse
         $this->request = $request;
         $this->data    = $this->request->getData(); 
         
-        info(['Digiseller webhook data: ',$this->data]);
+        info(['Lava webhook data: ',$this->data]);
 
         if ($this->getSign() !== $this->calculateSignature()) {
             throw new InvalidResponseException('Invalid hash');
@@ -69,7 +69,7 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getSign()
     {
-        info(['Digiseller webhook Authorization: ', $this->request->header('Authorization')]);
+        info(['Lava webhook Authorization: ', $this->request->header('Authorization')]);
         return $this->request->header('Authorization');
     }
     
