@@ -31,8 +31,6 @@ class InvoiceRequest extends AbstractRequest
 
     private function getRequestBody()
     {
-        info($this->getPaymentMethods());exit;
-        
         $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
@@ -40,6 +38,8 @@ class InvoiceRequest extends AbstractRequest
             'includeService'    => $this->getPaymentMethods(),
             'comment'           => $this->getDescription(),
         ]);
+        
+        info($return);exit;
         
         $return['customFields'] = json_encode($return);
         
@@ -72,13 +72,10 @@ class InvoiceRequest extends AbstractRequest
     protected function getClient($data)
     {        
         $data = json_encode($data,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        $sign = $this->getSign();
 
         $curl = curl_init();
         
-        $sign = $this->getSign();
-        
-        info([$data,$sign]);
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => $this->getEndpoint(), 
             CURLOPT_RETURNTRANSFER => true, CURLOPT_ENCODING => '',
