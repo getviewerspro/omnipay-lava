@@ -39,7 +39,7 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return $this->data['status'] == 0 ? true : false;
+        return $this->data['status'] === 'success';
     }
 
     public function getTransactionId()
@@ -70,6 +70,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getSign()
     {
         info(['Lava webhook Authorization: ', $this->request->header('Authorization')]);
+        
         return $this->request->header('Authorization');
     }
     
