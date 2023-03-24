@@ -9,7 +9,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
 {
     protected $request;
 
-    public function __construct(RequestInterface $request, $data)
+    public function __construct(InvoiceRequest $request, $data)
     {
         $this->request = $request;
         $this->data    = $this->request->getData(); 
