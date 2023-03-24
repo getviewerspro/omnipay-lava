@@ -58,6 +58,15 @@ class Gateway extends AbstractGateway
     public function getShopId() {
         return $this->getParameter('shopId');
     }
+    
+    public function setLocale($value)
+    {
+        return $this->setParameter("locale", $value);
+    }
+
+    public function getLocale() {
+        return $this->getParameter('locale');
+    }
 
     public function createInvoice(array $options = [])
     {
