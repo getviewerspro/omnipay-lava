@@ -31,6 +31,8 @@ class InvoiceRequest extends AbstractRequest
 
     private function getRequestBody()
     {
+        info($this->getPaymentMethods());exit;
+        
         $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
