@@ -45,20 +45,20 @@ class Gateway extends AbstractGateway
     
     public function setTestParam($value)
     {
-        return $this->setParameter("TestParam", $value);
+        return $this->setParameter("includeService", $value);
     }
 
     public function getTestParam() {
-        return $this->getParameter('TestParam');
+        return $this->getParameter('includeService');
     }
     
     public function setPaymentMethods($value)
     {
-        return $this->setParameter("paymentMethods", $value);
+        return $this->setParameter("includeService", $value);
     }
 
     public function getPaymentMethods() {
-        return $this->getParameter('paymentMethods');
+        return $this->getParameter('includeService');
     }
     
     public function setShopId($value)
