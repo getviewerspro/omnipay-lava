@@ -19,28 +19,28 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     
     public function isSuccessful()
     {
-        if (!isset($this->data['status'])) {
+        if (!isset($this->data['data']['status'])) {
             return false;
         }
         
-        return ($this->data['status'] == 0) ? true : false;
+        return ($data['data']['status'] == 0) ? true : false;
 
     }
 
     public function getInvoiceId()
     {
-        return $this->data['id'];
+        return $this->data['data']['id'];
     }
 
     public function getInvoiceLink()
     {
-        $url = $this->data['url'] ?? '';
+        $url = $this->data['data']['url'] ?? '';
         
         if (!empty($url)) {
             $url = str_replace('=ru', '='.$this->getLocale(), $url);
         }
             
-        return $this->data['url'] ?? '';
+        return $url;
     }
 
     public function getMessage()
@@ -56,15 +56,5 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     public function getRedirectUrl()
     {
         return $this->getInvoiceLink();
-    }
-
-    public function getRedirectData()
-    {
-        return [];
-    }
-
-    public function getRedirectMethod()
-    {
-        return 'GET';
     }
 }
