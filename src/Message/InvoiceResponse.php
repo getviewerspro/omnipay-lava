@@ -13,8 +13,8 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     {
         $this->request = $request;
         $this->data    = $data; 
-        
-        info(['Digiseller InvoiceResponse data and locale: ', $this->data, $this->request->getLocale()]);
+
+        info(['Digiseller InvoiceResponse data: ', $this->data]);
     }
     
     public function isSuccessful()
@@ -37,7 +37,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
         $url = $this->data['data']['url'] ?? '';
         
         if (!empty($url)) {
-            $url = str_replace('=ru', '='.$this->getLocale(), $url);
+            $url = str_replace('=ru', '='.$this->request->getLocale(), $url);
         }
             
         return $url;
