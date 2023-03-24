@@ -67,5 +67,14 @@ abstract class AbstractRequest extends Request
     public function getPaymentMethods() {
         return $this->getParameter('includeService');
     }
+        
+    public function setLocale($value)
+    {
+        return $this->setParameter("locale", $value);
+    }
+
+    public function getLocale() {
+        return $this->getParameter('locale');
+    }
 
 }
