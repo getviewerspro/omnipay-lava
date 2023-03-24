@@ -14,7 +14,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
         $this->request = $request;
         $this->data    = $data; 
 
-        info(['Digiseller InvoiceResponse data: ', $this->data]);
+        info(['Lava InvoiceResponse data: ', $this->data]);
     }
     
     public function isSuccessful()
