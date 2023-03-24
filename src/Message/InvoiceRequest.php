@@ -35,8 +35,7 @@ class InvoiceRequest extends AbstractRequest
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
             'shopId'            => $this->getShopId(),
-            'includeService'    => $this->getTestParam(),
-            'includeService2'    => $this->getPaymentMethods(),
+            'includeService'    => $this->getPaymentMethods(),
             'comment'           => $this->getDescription(),
         ]);
         
