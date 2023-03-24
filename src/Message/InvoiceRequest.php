@@ -32,8 +32,6 @@ class InvoiceRequest extends AbstractRequest
     private function getRequestBody()
     {
         
-        dd($this->getPaymentMethod(), $this->getPaymentMethods());
-        
         $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
@@ -41,6 +39,8 @@ class InvoiceRequest extends AbstractRequest
             'includeService'    => (!empty($this->getPaymentMethod()) ? [$this->getPaymentMethod()] : $this->getPaymentMethods()),
             'comment'           => $this->getDescription(),
         ]);
+        
+        dd($return, $this->getPaymentMethod(), $this->getPaymentMethods());
         
         $return['customFields'] = json_encode($return);
         
