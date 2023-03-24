@@ -7,7 +7,16 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 
 class InvoiceResponse extends AbstractResponse implements RedirectResponseInterface
 {
+    protected $request;
 
+    public function __construct(RequestInterface $request, $data)
+    {
+        $this->request = $request;
+        $this->data    = $this->request->getData(); 
+        
+        info(['Digiseller InvoiceResponse locale: ', $this->request->getLocale()]);
+    }
+    
     public function isSuccessful()
     {
         if (!isset($this->data['status'])) {
@@ -25,6 +34,12 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
 
     public function getInvoiceLink()
     {
+        $url = $this->data['url'] ?? '';
+        
+        if (!empty($url)) {
+            $url = str_replace('=ru', '='.$this->getLocale(), $url);
+        }
+            
         return $this->data['url'] ?? '';
     }
 
