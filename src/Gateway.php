@@ -43,22 +43,13 @@ class Gateway extends AbstractGateway
         return $this->getParameter("secretKeyAdd");
     }
     
-    public function setTestParam($value)
-    {
-        return $this->setParameter("includeService", $value);
-    }
-
-    public function getTestParam() {
-        return $this->getParameter('includeService');
-    }
-    
     public function setPaymentMethods($value)
     {
-        return $this->setParameter("includeService", $value);
+        return $this->setParameter("paymentMethods", $value);
     }
 
     public function getPaymentMethods() {
-        return $this->getParameter('includeService');
+        return $this->getParameter('paymentMethods');
     }
     
     public function setShopId($value)
