@@ -25,7 +25,7 @@ class Gateway extends AbstractGateway
 
     public function setSecretKey($value)
     {
-        return $this->setParameter("secretKey",$value);
+        return $this->setParameter("secretKey", $value);
     }
 
     public function getSecretKey()
@@ -35,7 +35,7 @@ class Gateway extends AbstractGateway
 
     public function setSecretKeyAdd($value)
     {
-        return $this->setParameter("secretKeyAdd",$value);
+        return $this->setParameter("secretKeyAdd", $value);
     }
 
     public function getSecretKeyAdd()
@@ -50,6 +50,15 @@ class Gateway extends AbstractGateway
 
     public function getTestParam() {
         return $this->getParameter('TestParam');
+    }
+    
+    public function setPaymentMethods($value)
+    {
+        return $this->setParameter("paymentMethods", $value);
+    }
+
+    public function getPaymentMethods() {
+        return $this->getParameter('paymentMethods');
     }
     
     public function setShopId($value)
