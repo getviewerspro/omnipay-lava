@@ -12,7 +12,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     public function __construct(InvoiceRequest $request, $data)
     {
         $this->request = $request;
-        $this->data    = $this->request->getData(); 
+        $this->data    = $data; 
         
         info(['Digiseller InvoiceResponse data and locale: ', $this->data, $this->request->getLocale()]);
     }
