@@ -31,7 +31,6 @@ class InvoiceRequest extends AbstractRequest
 
     private function getRequestBody()
     {
-        
         $return =  array_filter([
             'sum'               => $this->getAmount(),
             'orderId'           => $this->getTransactionId(),
@@ -41,6 +40,8 @@ class InvoiceRequest extends AbstractRequest
         ]);
         
         $return['customFields'] = json_encode($return);
+        
+        info(['Lava request body: ', $return]);
         
         return $return;
     }
