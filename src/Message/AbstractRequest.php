@@ -15,7 +15,7 @@ abstract class AbstractRequest extends Request
     }
 
     public function setHeaders($value) {
-        return $this->setParameter('headers',$value);
+        return $this->setParameter('headers', $value);
     }
 
     public function getHeaders() {
@@ -42,7 +42,7 @@ abstract class AbstractRequest extends Request
 
     public function setSecretKeyAdd($value)
     {
-        return $this->setParameter("secretKeyAdd",$value);
+        return $this->setParameter("secretKeyAdd", $value);
     }
 
     public function getSecretKeyAdd()
@@ -57,8 +57,8 @@ abstract class AbstractRequest extends Request
 
     public function getShopId() {
         return $this->getParameter('shopId');
-    }
-
+    }   
+    
     public function setPaymentMethods($value)
     {
         return $this->setParameter("includeService", $value);
