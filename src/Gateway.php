@@ -18,7 +18,9 @@ class Gateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-        return [];
+        return [
+            'locale' => 'en'
+        ];
     }
 
     public function setSecretKey($value)
