@@ -33,14 +33,8 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     }
 
     public function getInvoiceLink()
-    {
-        $url = $this->data['data']['url'] ?? '';
-        
-        if (!empty($url)) {
-            $url = str_replace('=ru', '='.$this->request->getLocale(), $url);
-        }
-            
-        return $url;
+    {            
+        return $this->data['data']['url'] ?? '';
     }
 
     public function getMessage()
@@ -56,5 +50,12 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
     public function getRedirectUrl()
     {
         return $this->getInvoiceLink();
+    }
+    
+    public function getRedirectData()
+    {
+        return [
+            'lang' => $this->request->getLocale()
+        ];
     }
 }
