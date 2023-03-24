@@ -70,11 +70,11 @@ abstract class AbstractRequest extends Request
     
     public function setTestParam($value)
     {
-        return $this->setParameter("TestParam", $value);
+        return $this->setParameter("includeService", $value);
     }
 
     public function getTestParam() {
-        return $this->getParameter('TestParam');
+        return $this->getParameter('includeService');
     }
         
     public function setLocale($value)
