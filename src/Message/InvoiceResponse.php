@@ -14,7 +14,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
         $this->request = $request;
         $this->data    = $this->request->getData(); 
         
-        info(['Digiseller InvoiceResponse locale: ', $this->request->getLocale()]);
+        info(['Digiseller InvoiceResponse data and locale: ', $this->data, $this->request->getLocale()]);
     }
     
     public function isSuccessful()
