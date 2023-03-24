@@ -15,6 +15,17 @@ namespace Omnipay\Lava\Message;
  */
 class CompletePurchaseRequest extends AbstractRequest
 {
+   
+    /**
+     * Get the data for this request.
+     * @return array request data
+     */
+    public function header($str)
+    {
+        return $this->httpRequest->request->header($str);
+    }
+    
+    
     /**
      * Get the data for this request.
      * @return array request data
