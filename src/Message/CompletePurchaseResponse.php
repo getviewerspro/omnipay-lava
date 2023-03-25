@@ -28,7 +28,9 @@ class CompletePurchaseResponse extends AbstractResponse
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
-        $this->data    = $data; 
+        $this->data    = $this->getData(); 
+        
+        info(request()->all());
         
         info(['Lava webhook data: ', $this->data]);
 
