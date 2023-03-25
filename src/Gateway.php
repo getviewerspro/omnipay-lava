@@ -68,7 +68,7 @@ class Gateway extends AbstractGateway
 
     public function createInvoice(array $options = [])
     {
-        return $this->createRequest(InvoiceRequest::class, $options);
+        return $this->createRequest('\Omnipay\Lava\Message\InvoiceRequest', $options);
     }
 
     /**
