@@ -28,9 +28,9 @@ class CompletePurchaseResponse extends AbstractResponse
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
-        $this->data    = $this->request->getData(); 
+        $this->data    = $data; 
         
-        info(['Lava webhook data: ',$this->data]);
+        info(['Lava webhook data: ', $this->data]);
 
         if ($this->getSign() !== $this->calculateSignature()) {
             throw new InvalidResponseException('Invalid hash');
