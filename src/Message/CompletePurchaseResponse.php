@@ -78,10 +78,14 @@ class CompletePurchaseResponse extends AbstractResponse
     {
         $signStr = json_encode($this->data, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         
-        return hash_hmac(
+        $sign = hash_hmac(
                 'sha256',
                 $signStr,
                 $this->request->getSecretKeyAdd()
             );
+        
+        info(['calculateSignature', $this->request->getSecretKeyAdd(), $sign]);
+        
+        return $sign;
     }
 }
