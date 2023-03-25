@@ -2,11 +2,7 @@
 
 namespace Omnipay\Lava;
 
-use Omnipay\Lava\Message\CompletePurchaseRequest;
-use Omnipay\Lava\Message\Notification;
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Lava\Message\InvoiceRequest;
-
 
 class Gateway extends AbstractGateway
 {
@@ -76,29 +72,21 @@ class Gateway extends AbstractGateway
     }
 
     /**
-        Alias for createInvoice
+     * @param array $parameters
+     * @return \Omnipay\ePayService\Message\PurchaseRequest
      */
-    public function purchase(array $options = array()): \Omnipay\Common\Message\RequestInterface
+    public function purchase(array $parameters = [])
     {
-        return $this->createInvoice($options);
+        return $this->createRequest('\Omnipay\Lava\Message\PurchaseRequest', $parameters);
     }
 
-    public function acceptNotification(array $options = array()): \Omnipay\Common\Message\NotificationInterface
+    /**
+     * @param array $parameters
+     * @return \Omnipay\ePayService\Message\CompletePurchaseRequest
+     */
+    public function completePurchase(array $parameters = [])
     {
-        return $this->responseHandler($options);
+        return $this->createRequest('\Omnipay\Lava\Message\CompletePurchaseRequest', $parameters);
     }
 
-    public function completePurchase(array $options = array()): \Omnipay\Common\Message\RequestInterface
-    {
-        return $this->createRequest(CompletePurchaseRequest::class, $options);
-    }
-
-    private function  responseHandler(array $options = array())
-    {
-        $obj = new Notification();
-
-        $obj->initialize(array_replace($this->getParameters(),$options));
-
-        return $obj->getData();
-    }
 }
