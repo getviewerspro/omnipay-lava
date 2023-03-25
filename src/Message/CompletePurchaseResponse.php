@@ -30,8 +30,6 @@ class CompletePurchaseResponse extends AbstractResponse
         $this->request = $request;
         $this->data    = $this->getData(); 
         
-        info(request()->all());
-        
         info(['Lava webhook data: ', $this->data]);
 
         if ($this->getSign() !== $this->calculateSignature()) {
