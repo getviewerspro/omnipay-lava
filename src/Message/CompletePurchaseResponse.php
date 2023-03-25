@@ -28,7 +28,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
-        $this->data    = $this->getData(); 
+        $this->data    = request()->all();//$this->getData(); 
         
         info(['Lava webhook data: ', $this->data]);
 
@@ -69,9 +69,9 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getSign()
     {
-        info(['Lava webhook Authorization: ', $this->request->header('Authorization')]);
+        info(['Lava webhook Authorization: ', request()->header('Authorization')]);
         
-        return $this->request->header('Authorization');
+        return request()->header('Authorization');
     }
     
     public function calculateSignature()
