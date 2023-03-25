@@ -22,8 +22,8 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function header($str)
     {
-       return 123;
-        return $this->httpRequest->request->headers->get($str);
+         return request()->header($str);
+        //return $this->httpRequest->request->headers->get($str);
     }
     
     
@@ -34,7 +34,7 @@ class CompletePurchaseRequest extends AbstractRequest
     public function getData()
     {
         info($this->httpRequest->request->all());
-        return $this->httpRequest->request->all();
+        return request->all();
     }
 
     /**
