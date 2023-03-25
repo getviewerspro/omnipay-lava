@@ -76,7 +76,7 @@ class CompletePurchaseResponse extends AbstractResponse
     
     public function calculateSignature()
     {
-        $signStr = json_encode($this->data['custom_fields'], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+        $signStr = json_encode($this->data, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
         
         return hash_hmac(
                 'sha256',
