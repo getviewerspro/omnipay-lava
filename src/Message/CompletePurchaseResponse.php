@@ -84,7 +84,7 @@ class CompletePurchaseResponse extends AbstractResponse
                 $this->request->getSecretKeyAdd()
             );
         
-        info(['calculateSignature', $this->request->getSecretKeyAdd(), $sign]);
+        info(['calculateSignature', $this->data, $this->request->getSecretKeyAdd(), $sign]);
         
         return $sign;
     }
