@@ -73,7 +73,7 @@ class Gateway extends AbstractGateway
 
     /**
      * @param array $parameters
-     * @return \Omnipay\ePayService\Message\PurchaseRequest
+     * @return \Omnipay\Lava\Message\PurchaseRequest
      */
     public function purchase(array $parameters = [])
     {
@@ -82,7 +82,7 @@ class Gateway extends AbstractGateway
 
     /**
      * @param array $parameters
-     * @return \Omnipay\ePayService\Message\CompletePurchaseRequest
+     * @return \Omnipay\Lava\Message\CompletePurchaseRequest
      */
     public function completePurchase(array $parameters = [])
     {
