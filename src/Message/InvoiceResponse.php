@@ -23,7 +23,7 @@ class InvoiceResponse extends AbstractResponse implements RedirectResponseInterf
             return false;
         }
         
-        return ($this->data['data']['status'] == 0) ? true : false;
+        return ($this->data['data']['status'] == 1) ? true : false;
 
     }
 
