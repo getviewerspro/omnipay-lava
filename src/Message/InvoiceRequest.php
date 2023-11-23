@@ -41,8 +41,6 @@ class InvoiceRequest extends AbstractRequest
         
         $return['customFields'] = json_encode($return);
         
-        info(['Lava request body: ', $return]);
-        
         return $return;
     }
 

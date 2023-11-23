@@ -31,8 +31,6 @@ class CompletePurchaseResponse extends AbstractResponse
         $this->data    = request()->all();//$this->getData(); 
         
         ksort($this->data);
-        
-        info(['Lava webhook data: ', $this->data]);
 
         if ($this->getSign() !== $this->calculateSignature()) {
             throw new InvalidResponseException('Invalid hash');
@@ -70,9 +68,7 @@ class CompletePurchaseResponse extends AbstractResponse
     }
 
     public function getSign()
-    {
-        info(['Lava webhook Authorization: ', request()->header('Authorization')]);
-        
+    {    
         return request()->header('Authorization');
     }
     
@@ -85,8 +81,6 @@ class CompletePurchaseResponse extends AbstractResponse
                 $signStr,
                 $this->request->getSecretKeyAdd()
             );
-        
-        info(['calculateSignature', $this->data, $this->request->getSecretKeyAdd(), $sign]);
         
         return $sign;
     }

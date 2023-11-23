@@ -86,7 +86,6 @@ class Gateway extends AbstractGateway
      */
     public function completePurchase(array $parameters = [])
     {
-        info($parameters);
         return $this->createRequest('\Omnipay\Lava\Message\CompletePurchaseRequest', $parameters);
     }
 
